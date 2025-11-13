@@ -1,19 +1,16 @@
-Blog Application (Django + Next.js)
+# Blog Application (Django + Next.js)
 
 This repo contains a simple blog with a Django backend and a Next.js frontend. It includes JWT-based authentication, posts CRUD with permissions, pagination, and a TypeScript React UI.
 
-Quick start
+## Quick start
 1) Copy environment templates and adjust values as needed
-   ```sh
-   # Backend (Django)
+   ```bash
    cp backend/.env.example backend/.env
-
-   # Frontend (Next.js)
    cp frontend/.env.example frontend/.env
    ```
 
 2) Start both services with Docker Compose
-   ```sh 
+   ```bash 
       docker compose up --build
    ```
 
@@ -21,11 +18,12 @@ Quick start
    - Frontend: http://localhost:3000
    - Backend API: http://localhost:8000
 
-Sample requests
+## Sample requests
 - Ready-to-run HTTP examples (REST Client / curl) live in:
-  docs/sample_requests.http
 
-Endpoints
+    [docs/sample_requests.http](backend/docs/sample_requests.http)
+
+## Endpoints
 - POST /register/
 - POST /login/
 - POST /api/auth/refresh
@@ -35,9 +33,9 @@ Endpoints
 - PUT /posts/:id (author only)
 - DELETE /posts/:id (author only)
 
-Testing (backend)
+## Testing (backend)
 - From the repo root (requires Python env):
-  ```sh
+  ```bash
     pip install -r backend/requirements.txt
-    pytest -q
+    pytest -q backend
   ```

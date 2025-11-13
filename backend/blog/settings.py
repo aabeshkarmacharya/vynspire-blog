@@ -12,10 +12,11 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 
 import os
 from pathlib import Path
+from dotenv import load_dotenv
 
+load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
@@ -29,7 +30,6 @@ DEBUG = os.environ.get('DJANGO_DEBUG', 'true').lower() in ('1', 'true', 'yes')
 
 ALLOWED_HOSTS_ENV = os.environ.get('DJANGO_ALLOWED_HOSTS', '*')
 ALLOWED_HOSTS = [h.strip() for h in ALLOWED_HOSTS_ENV.split(',') if h.strip()]
-
 
 # Application definition
 
@@ -56,14 +56,23 @@ ROOT_URLCONF = 'blog.urls'
 
 WSGI_APPLICATION = 'blog.wsgi.application'
 
+DATABASE_HOST = os.environ.get("DB_HOST", "localhost")
+DATABASE_PORT = os.environ.get("DB_PORT", 5432)
+DATABASE_NAME = os.environ.get("DB_NAME", "postgres")
+DATABASE_USER = os.environ.get("DB_USER", "postgres")
+DATABASE_PASSWORD = os.environ.get("DB_PASSWORD", "")
 
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        "NAME": DATABASE_NAME,
+        "USER": DATABASE_USER,
+        "HOST": DATABASE_HOST,
+        "PORT": DATABASE_PORT,
+        "PASSWORD": DATABASE_PASSWORD,
     }
 }
 
@@ -94,7 +103,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/
 
@@ -105,7 +113,6 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 
 USE_TZ = True
-
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field

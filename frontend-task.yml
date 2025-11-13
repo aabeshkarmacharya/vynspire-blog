@@ -1,0 +1,25 @@
+Objective:
+    Build a simple Blog Application with user registration, login, and post management. Backend
+    should expose a REST API with JWT-based authentication. Frontend should include pages to
+    view, create, edit, and delete posts, using state management and authentication.
+Frontend:
+  Tech:
+    - Next.js
+    - Any state management library (Redux)
+    - Fetch
+    - CSS/UI lib (Chakra)
+  Requirements:
+    - State Management: Store user auth status and JWT.
+    - Login & Registration Page
+    - Blog List Page
+    - Post Detail Page
+    - Create/Edit Post Page (only visible if logged in)
+    - Logout Functionality
+    - Persist login state using localStorage or cookies.
+  Access Control:
+    - Show login/register button if logged out.
+    - Hide create/edit/delete if not authenticated.
+    - Display error toast/messages on failures
+  Bonus:
+    - SSR in Next.js
+    - Form validation

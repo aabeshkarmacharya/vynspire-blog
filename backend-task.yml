@@ -1,0 +1,69 @@
+Objective:
+    Build a simple Blog Application with user registration, login, and post management. Backend
+    should expose a REST API with JWT-based authentication. Frontend should include pages to
+    view, create, edit, and delete posts, using state management and authentication.
+Backend:
+    Tech:
+        - Django (without DRF)
+        - pyjwt for JWT handling
+Requirements:
+  Models:
+    - User: Extend Django’s AbstractUser if needed.
+    - Post:
+      - title: CharField
+      - content: TextField
+      - author: FK to User
+      - created_at: DateTimeField (auto_now_add=True)
+  Endpoints:
+    Register:
+      method: POST
+      endpoint: /register/
+      description: Register a new user
+      auth: Public
+    Login:
+      method: POST
+      endpoint: /login/
+      description: Return JWT for valid credentials
+      auth: Public
+    Get-Posts:
+      method: GET
+      endpoint: /posts/
+      description: Get all posts
+      auth: Public
+    Get-Post:
+      method: GET
+      endpoint: /posts/<id>
+      description: Get post details
+      auth: Public
+    Create-Post:
+      method: POST
+      endpoint: /posts/
+      description: Create new post
+      auth: Authenticated
+    Edit-Post:
+      method: PUT
+      endpoint: /posts/<id>
+      description: Edit a post (only author)
+      auth: Authenticated
+    Delete-Post:
+      method: DELETE
+      endpoint: /posts/<id>
+      description: Delete a post (only author)
+      auth: Authenticated
+
+  JWT Auth Requirements:
+    - Implement custom JWT auth using pyjwt
+    - Store token in "Authorization: Bearer <token>"
+    - Token expiry: 1 hour
+  Custom Middleware:
+    - Log every request method, path, and time taken in ms.
+  Error Handling:
+    - 401 for expired/invalid token
+    - 403 for unauthorized action (e.g. editing others' posts)
+    - 404 for not found
+
+Bonus Requirements:
+  - Token refresh logic
+  - Pagination for posts
+  - Dockerization
+  - Unit tests

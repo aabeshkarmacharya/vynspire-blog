@@ -1,0 +1,77 @@
+### Variables
+@base = http://localhost:8000
+@username = vynspire
+@password = vynspire1234
+
+### Register
+POST {{base}}/register/
+Content-Type: application/json
+
+{
+  "username": "{{username}}",
+  "password": "{{password}}"
+}
+
+### Login (returns tokens)
+POST {{base}}/login/
+Content-Type: application/json
+
+{
+  "username": "{{username}}",
+  "password": "{{password}}"
+}
+
+### Refresh access token (replace <REFRESH_TOKEN>)
+POST {{base}}/api/auth/refresh
+Content-Type: application/json
+
+{
+  "refresh": "<REFRESH_TOKEN>"
+}
+
+### List posts (public)
+GET {{base}}/posts/?page=1&page_size=10
+
+### Create post (requires Bearer token)
+POST {{base}}/posts/
+Content-Type: application/json
+Authorization: Bearer <ACCESS_TOKEN>
+
+{
+  "title": "Hello World",
+  "content": "This is my first post."
+}
+
+### Get post by id (public)
+GET {{base}}/posts/1
+
+### Update post (author-only)
+PUT {{base}}/posts/1
+Content-Type: application/json
+Authorization: Bearer <ACCESS_TOKEN>
+
+{
+  "title": "Updated Title",
+  "content": "Updated content"
+}
+
+### Delete post (author-only)
+DELETE {{base}}/posts/1
+Authorization: Bearer <ACCESS_TOKEN>
+
+### Curl equivalents (copy/paste)
+# Register
+# curl -X POST "$base/register/" -H 'Content-Type: application/json' \
+#   -d '{"username":"alice","password":"pass1234"}'
+
+# Login
+# curl -X POST "$base/login/" -H 'Content-Type: application/json' \
+#   -d '{"username":"alice","password":"pass1234"}'
+
+# Refresh
+# curl -X POST "$base/api/auth/refresh" -H 'Content-Type: application/json' \
+#   -d '{"refresh":"<REFRESH_TOKEN>"}'
+
+# Create post
+# curl -X POST "$base/posts/" -H 'Authorization: Bearer <ACCESS_TOKEN>' -H 'Content-Type: application/json' \
+#   -d '{"title":"Hello World","content":"This is my first post."}'

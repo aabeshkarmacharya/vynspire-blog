@@ -1,0 +1,30 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+../.venv/
+venv/
+env/
+
+# Git
+.git/
+.gitignore
+
+# IDE
+.idea/
+.vscode/
+
+# Byte-compiled / cache
+*.log
+
+# Django
+*.sqlite3
+backend/db.sqlite3
+staticfiles/
+media/
+
+# Docker
+Dockerfile*
+docker-compose*.yml

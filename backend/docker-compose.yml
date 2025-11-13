@@ -1,0 +1,14 @@
+services:
+  web:
+    build: .
+    container_name: blog-backend
+    command: sh -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+    ports:
+      - "8000:8000"
+    environment:
+      - DJANGO_DEBUG=1
+      - DJANGO_ALLOWED_HOSTS=*
+      - DJANGO_SECRET_KEY=dev-secret-change-me
+    volumes:
+      - ./:/app
+    restart: unless-stopped

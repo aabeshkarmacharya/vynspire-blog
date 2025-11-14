@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Box, Button, FormControl, FormLabel, Input, Heading, useToast } from '@chakra-ui/react';
 import { apiPost } from '../lib/api';
 import { useRouter } from 'next/router';
+import { useSelector } from 'react-redux';
 
 export default function RegisterPage() {
   const [username, setUsername] = useState('');
@@ -9,6 +10,14 @@ export default function RegisterPage() {
   const [loading, setLoading] = useState(false);
   const toast = useToast();
   const router = useRouter();
+  const auth = useSelector((s: any) => s.auth);
+
+  // If already logged in, redirect to home
+  useEffect(() => {
+    if (auth?.access) {
+      router.replace('/');
+    }
+  }, [auth?.access, router]);
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -23,6 +32,10 @@ export default function RegisterPage() {
       setLoading(false);
     }
   };
+
+  if (auth?.access) {
+    return <Box p={4}>Redirecting...</Box>;
+  }
 
   return (
     <Box p={4} maxW="480px" mx="auto">

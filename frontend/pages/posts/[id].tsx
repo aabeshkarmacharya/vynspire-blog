@@ -51,7 +51,7 @@ export default function PostDetailPage() {
   return (
     <Box p={4} maxW="800px" mx="auto">
       <Heading>{post.title}</Heading>
-      <Text fontSize="sm" color="gray.600" mb={4}>by user {post.author} · <Time iso={post.created_at} /></Text>
+      <Text fontSize="sm" color="gray.600" mb={4}>by {post.author} · <Time iso={post.created_at} /></Text>
       <Text whiteSpace="pre-wrap">{post.content}</Text>
 
       <Flex mt={4} gap={2}>

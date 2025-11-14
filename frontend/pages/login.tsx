@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Box, Button, FormControl, FormLabel, Input, Heading, useToast } from '@chakra-ui/react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { loginSuccess } from '../lib/store';
 import { apiPost } from '../lib/api';
 import { decodeJwt, JwtPayload } from '../lib/jwt';
@@ -13,6 +13,14 @@ export default function LoginPage() {
   const dispatch = useDispatch();
   const toast = useToast();
   const router = useRouter();
+  const auth = useSelector((s: any) => s.auth);
+
+  // If already logged in, redirect to home
+  useEffect(() => {
+    if (auth?.access) {
+      router.replace('/');
+    }
+  }, [auth?.access, router]);
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -32,6 +40,10 @@ export default function LoginPage() {
       setLoading(false);
     }
   };
+
+  if (auth?.access) {
+    return <Box p={4}>Redirecting...</Box>;
+  }
 
   return (
     <Box p={4} maxW="480px" mx="auto">

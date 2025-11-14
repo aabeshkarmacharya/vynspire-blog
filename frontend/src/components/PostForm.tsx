@@ -34,7 +34,7 @@ export default function PostForm({
     <Box as="form" onSubmit={handleSubmit} maxW="600px" mx="auto" p={4}>
       <FormControl mb={3}>
         <FormLabel>Title</FormLabel>
-        <Input value={title} onChange={(e) => setTitle(e.target.value)} />
+        <Input value={title} autoFocus={true} onChange={(e) => setTitle(e.target.value)} />
       </FormControl>
       <FormControl mb={3}>
         <FormLabel>Content</FormLabel>

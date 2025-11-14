@@ -50,7 +50,7 @@ export default function Home({ data }: { data: PageData }) {
       {results.map((p) => (
         <Box key={p.id} p={4} borderWidth="1px" borderRadius="md" mb={3}>
           <Link href={`/posts/${p.id}`}><Heading size="md">{p.title}</Heading></Link>
-          <Text fontSize="sm" color="gray.600">by user {p.author} · <Time iso={p.created_at} /></Text>
+          <Text fontSize="sm" color="gray.600">by {p.author} · <Time iso={p.created_at} /></Text>
           <Text mt={2} noOfLines={3}>{p.content}</Text>
         </Box>
       ))}

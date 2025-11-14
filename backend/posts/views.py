@@ -22,7 +22,7 @@ def _post_to_dict(post: Post):
         'id': post.id,
         'title': post.title,
         'content': post.content,
-        'author': post.author_id,
+        'author': post.author.username,
         'created_at': post.created_at.isoformat(),
     }
 
@@ -48,7 +48,7 @@ def posts(request: HttpRequest):
         if page_size > 100:
             page_size = 100
 
-        qs = Post.objects.all()
+        qs = Post.objects.prefetch_related('author').all()
         total = qs.count()
         start = (page - 1) * page_size
         end = start + page_size

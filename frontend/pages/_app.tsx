@@ -13,7 +13,7 @@ function Bootstrapper({ children }: PropsWithChildren) {
     const unsubscribe = store.subscribe(() => saveAuthToStorage(store.getState));
     return () => unsubscribe();
   }, [dispatch]);
-  return children as JSX.Element;
+  return children;
 }
 
 export default function App({ Component, pageProps }: AppProps) {
